@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangdg.server.mapper.WeatherMapper">
+
+    <select id="count" resultType="Integer">
+        SELECT COUNT(*) FROM t_weather WHERE city_code = #{cityId} AND date_time = #{dateTime}
+    </select>
+
+    <insert id="insert" parameterType="WeatherData">
+        INSERT INTO t_weather (
+            city_code,
+            date_time,
+            main_temp,
+            main_temp_min,
+            main_temp_max,
+            main_pressure,
+            humidity,
+            description,
+            date_time_txt
+        ) VALUES (
+            #{cityCode},
+            #{dateTime},
+            #{mainTemp},
+            #{mainTempMin},
+            #{mainTempMax},
+            #{mainPressure},
+            #{humidity},
+            #{description},
+            #{dateTimeText}
+        )
+    </insert>
+
+    <update id="update" parameterType="WeatherData">
+        UPDATE t_weather SET
+            main_temp = #{mainTemp},
+            main_temp_min = #{mainTempMin},
+            main_temp_max = #{mainTempMax},
+            main_pressure = #{mainPressure},
+            humidity = #{humidity},
+            description = #{description},
+            date_time_txt = #{dateTimeText}
+        WHERE city_code = #{cityCode} AND date_time = #{dateTime}
+    </update>
+
+</mapper>
